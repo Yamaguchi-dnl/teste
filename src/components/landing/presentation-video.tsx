@@ -82,7 +82,7 @@ export default function PresentationVideo() {
               <div 
                 className="relative aspect-video rounded-xl shadow-2xl shadow-primary/20 overflow-hidden cursor-pointer group border-2 border-primary/30"
               >
-                 <div className="absolute -inset-8 blur-[100px] bg-primary/30 animate-pulse" />
+                 <div className="absolute -inset-4 blur-[150px] bg-primary/50 animate-pulse" />
                 <Image
                   src="https://placehold.co/1280x720.png"
                   alt="Apresentação da Ovídio Academy"
