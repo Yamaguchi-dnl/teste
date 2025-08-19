@@ -35,13 +35,13 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="depoimentos" className="py-20 md:py-32 bg-foreground text-background">
+    <section id="depoimentos" className="py-20 md:py-32 bg-zinc-950 text-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
             O que nossos alunos dizem
           </h2>
-          <p className="mt-4 text-lg text-background/80">
+          <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">
             Histórias de sucesso que nos inspiram todos os dias.
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function Testimonials() {
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
-                  <Card className="bg-background/10 backdrop-blur-sm border-primary/20 shadow-lg h-full text-foreground">
+                  <Card className="bg-white/5 backdrop-blur-sm border-primary/20 shadow-lg h-full text-white">
                     <CardContent className="flex flex-col items-center text-center p-6 h-full justify-center">
                       <Image
                         src={testimonial.image}
@@ -66,16 +66,16 @@ export default function Testimonials() {
                         className="rounded-full mb-4 border-2 border-primary"
                         data-ai-hint="person"
                       />
-                      <p className="text-muted-foreground italic flex-1">"{testimonial.quote}"</p>
-                      <p className="mt-4 font-bold text-foreground">{testimonial.name}</p>
+                      <p className="text-white/70 italic flex-1">"{testimonial.quote}"</p>
+                      <p className="mt-4 font-bold text-white">{testimonial.name}</p>
                     </CardContent>
                   </Card>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex text-foreground" />
-          <CarouselNext className="hidden md:flex text-foreground" />
+          <CarouselPrevious className="hidden md:flex text-white border-white/20 hover:bg-white/10" />
+          <CarouselNext className="hidden md:flex text-white border-white/20 hover:bg-white/10" />
         </Carousel>
       </div>
     </section>
