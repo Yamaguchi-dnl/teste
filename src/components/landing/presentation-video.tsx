@@ -4,8 +4,9 @@ import Image from "next/image";
 import { Play, PlayCircle, SkipBack, SkipForward } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-const FuturistLine = ({ reverse = false }: { reverse?: boolean }) => (
+const FuturistLine = ({ reverse = false, className }: { reverse?: boolean, className?: string }) => (
   <svg
     width="100%"
     height="40"
@@ -13,8 +14,7 @@ const FuturistLine = ({ reverse = false }: { reverse?: boolean }) => (
     preserveAspectRatio="none"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={`absolute ${reverse ? 'right-0 -scale-x-100' : 'left-0'}`}
-    style={{ top: '50%', transform: 'translateY(-50%)' }}
+    className={cn(`absolute ${reverse ? 'right-0 -scale-x-100' : 'left-0'}`, className)}
   >
     <path
       d="M0 20 L80 20 L100 5 L220 5 L240 20 L300 20"
@@ -61,11 +61,14 @@ export default function PresentationVideo() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="hidden md:flex col-span-2 flex-col items-center text-center relative h-full justify-center"
+              className="hidden md:flex col-span-2 flex-col items-center text-center relative h-full justify-around"
             >
-               <FuturistLine reverse={true} />
-              <SkipForward className="h-8 w-8 text-primary mb-2" />
-              <p className="text-sm text-white/70">Aperte o play e entenda a nova era que começou</p>
+               <FuturistLine reverse={true} className="top-1/4" />
+               <div className="flex flex-col items-center">
+                <SkipForward className="h-8 w-8 text-primary mb-2" />
+                <p className="text-sm text-white/70">Aperte o play e entenda a nova era que começou</p>
+               </div>
+              <FuturistLine reverse={true} className="bottom-1/4" />
             </motion.div>
 
             {/* Video Player */}
@@ -79,14 +82,16 @@ export default function PresentationVideo() {
               <div 
                 className="relative aspect-video rounded-xl shadow-2xl shadow-primary/20 overflow-hidden cursor-pointer group border-2 border-primary/30"
               >
+                 <div className="absolute -inset-8 blur-3xl bg-primary/20 animate-pulse" />
                 <Image
                   src="https://placehold.co/1280x720.png"
                   alt="Apresentação da Ovídio Academy"
                   fill
                   style={{ objectFit: "cover" }}
+                  className="relative z-10"
                   data-ai-hint="teacher presentation"
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center z-20">
                   <PlayCircle className="h-20 w-20 text-white/80 group-hover:text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
               </div>
@@ -98,11 +103,14 @@ export default function PresentationVideo() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="hidden md:flex col-span-2 flex-col items-center text-center relative h-full justify-center"
+              className="hidden md:flex col-span-2 flex-col items-center text-center relative h-full justify-around"
             >
-              <FuturistLine />
-              <SkipBack className="h-8 w-8 text-primary mb-2" />
-              <p className="text-sm text-white/70">Não pule esse vídeo</p>
+              <FuturistLine className="top-1/4" />
+              <div className="flex flex-col items-center">
+                <SkipBack className="h-8 w-8 text-primary mb-2" />
+                <p className="text-sm text-white/70">Não pule esse vídeo</p>
+              </div>
+              <FuturistLine className="bottom-1/4" />
             </motion.div>
 
           </div>
