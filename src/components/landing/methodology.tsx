@@ -28,7 +28,7 @@ const steps = [
 
 export default function Methodology() {
   return (
-    <section id="metodologia" className="py-20 md:py-32 bg-card text-card-foreground">
+    <section id="metodologia" className="py-20 md:py-32 bg-background text-foreground">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -45,9 +45,10 @@ export default function Methodology() {
           </p>
         </motion.div>
 
-        <div className="relative mt-16">
+        <div className="relative mt-24">
+          {/* Desktop Timeline */}
           <div className="hidden md:block">
-            <div className="absolute left-0 right-0 top-8 -translate-y-1/2 h-1 bg-primary/20 rounded-full" />
+            <div className="absolute left-0 right-0 top-8 h-1 -translate-y-1/2 rounded-full bg-primary/20" />
             <div className="relative grid grid-cols-4 gap-8">
               {steps.map((step, index) => (
                 <motion.div
@@ -56,10 +57,9 @@ export default function Methodology() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="relative flex flex-col items-center text-center p-4"
+                  className="relative flex flex-col items-center pt-16 text-center"
                 >
-                  <div className="absolute top-8 -translate-y-1/2 h-4 w-4 rounded-full bg-primary ring-4 ring-card" />
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-foreground mb-4">
+                  <div className="absolute top-8 flex h-16 w-16 -translate-y-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground ring-8 ring-background">
                     {step.icon}
                   </div>
                   <h3 className="text-xl font-bold">{step.title}</h3>
@@ -69,8 +69,9 @@ export default function Methodology() {
             </div>
           </div>
           
-           <div className="md:hidden relative flex flex-col gap-12">
-             <div className="absolute left-8 top-0 bottom-0 w-1 bg-primary/20" />
+           {/* Mobile Timeline */}
+           <div className="relative flex flex-col gap-16 md:hidden">
+             <div className="absolute bottom-0 top-0 left-8 w-1 -translate-x-1/2 rounded-full bg-primary/20" />
              {steps.map((step, index) => (
                <motion.div
                  key={index}
@@ -80,12 +81,13 @@ export default function Methodology() {
                  transition={{ duration: 0.5, delay: index * 0.2 }}
                  className="relative pl-20"
                >
-                 <div className="absolute left-8 top-1/2 -translate-y-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-primary ring-4 ring-card" />
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-foreground mb-4">
+                 <div className="absolute left-8 top-0 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-accent-foreground ring-8 ring-background">
                     {step.icon}
                   </div>
-                 <h3 className="text-xl font-bold">{step.title}</h3>
-                 <p className="mt-2 text-muted-foreground">{step.description}</p>
+                 <div className="pt-2">
+                    <h3 className="text-xl font-bold">{step.title}</h3>
+                    <p className="mt-2 text-muted-foreground">{step.description}</p>
+                 </div>
                </motion.div>
              ))}
            </div>
@@ -93,4 +95,3 @@ export default function Methodology() {
       </div>
     </section>
   );
-}
