@@ -70,7 +70,7 @@
   .futuristic-card {
     position: relative;
     background-color: hsl(var(--primary) / 0.05);
-    border: 1px solid hsl(var(--primary) / 0.1);
+    border: 1px solid hsl(var(--foreground) / 0.2);
     backdrop-filter: blur(4px);
     clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
     transition: all 0.3s ease;
@@ -91,7 +91,7 @@
   .futuristic-card:hover {
     transform: translateY(-5px) scale(1.02);
     background-color: hsl(var(--primary) / 0.1);
-    border-color: hsl(var(--primary) / 0.3);
+    border-color: hsl(var(--foreground) / 0.3);
   }
 
   .futuristic-card:hover::before {
