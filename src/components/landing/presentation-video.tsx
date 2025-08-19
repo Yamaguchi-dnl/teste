@@ -63,12 +63,12 @@ export default function PresentationVideo() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="hidden md:flex col-span-2 flex-col items-center text-center relative h-full justify-around"
             >
-               <FuturistLine reverse={true} className="top-1/4" />
+               <FuturistLine reverse={true} className="top-8" />
                <div className="flex flex-col items-center">
                 <SkipForward className="h-8 w-8 text-primary mb-2" />
-                <p className="text-sm text-white/70">Aperte o play e entenda a nova era que começou</p>
+                <p className="text-sm text-white/70">Descubra o método que vai acelerar seu aprendizado.</p>
                </div>
-              <FuturistLine reverse={true} className="bottom-1/4" />
+              <FuturistLine reverse={true} className="bottom-8" />
             </motion.div>
 
             {/* Video Player */}
@@ -82,7 +82,7 @@ export default function PresentationVideo() {
               <div 
                 className="relative aspect-video rounded-xl shadow-2xl shadow-primary/20 overflow-hidden cursor-pointer group border-2 border-primary/30"
               >
-                 <div className="absolute -inset-8 blur-3xl bg-primary/20 animate-pulse" />
+                 <div className="absolute -inset-8 blur-[100px] bg-primary/30 animate-pulse" />
                 <Image
                   src="https://placehold.co/1280x720.png"
                   alt="Apresentação da Ovídio Academy"
@@ -105,12 +105,12 @@ export default function PresentationVideo() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="hidden md:flex col-span-2 flex-col items-center text-center relative h-full justify-around"
             >
-              <FuturistLine className="top-1/4" />
+              <FuturistLine className="top-8" />
               <div className="flex flex-col items-center">
                 <SkipBack className="h-8 w-8 text-primary mb-2" />
-                <p className="text-sm text-white/70">Não pule esse vídeo</p>
+                <p className="text-sm text-white/70">Um passo importante para sua nova carreira.</p>
               </div>
-              <FuturistLine className="bottom-1/4" />
+              <FuturistLine className="bottom-8" />
             </motion.div>
 
           </div>
