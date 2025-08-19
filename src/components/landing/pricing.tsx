@@ -39,7 +39,7 @@ export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
 
   return (
-    <section id="planos" className="py-20 md:py-32 bg-background">
+    <section id="planos" className="py-20 md:py-32 bg-card text-card-foreground">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">

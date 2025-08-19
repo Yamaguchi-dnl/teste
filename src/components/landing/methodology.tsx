@@ -28,7 +28,7 @@ const steps = [
 
 export default function Methodology() {
   return (
-    <section id="metodologia" className="py-20 md:py-32 bg-background">
+    <section id="metodologia" className="py-20 md:py-32 bg-card text-card-foreground">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,7 +58,7 @@ export default function Methodology() {
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   className="relative flex flex-col items-center text-center p-4"
                 >
-                  <div className="absolute top-8 -translate-y-1/2 h-4 w-4 rounded-full bg-primary ring-4 ring-background" />
+                  <div className="absolute top-8 -translate-y-1/2 h-4 w-4 rounded-full bg-primary ring-4 ring-card" />
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-foreground mb-4">
                     {step.icon}
                   </div>
@@ -80,7 +80,7 @@ export default function Methodology() {
                  transition={{ duration: 0.5, delay: index * 0.2 }}
                  className="relative pl-20"
                >
-                 <div className="absolute left-8 top-1/2 -translate-y-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-primary ring-4 ring-background" />
+                 <div className="absolute left-8 top-1/2 -translate-y-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-primary ring-4 ring-card" />
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-foreground mb-4">
                     {step.icon}
                   </div>
