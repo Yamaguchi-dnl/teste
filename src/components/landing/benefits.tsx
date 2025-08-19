@@ -45,7 +45,7 @@ const cardVariants = {
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="py-20 md:py-32 bg-soft">
+    <section id="beneficios" className="py-20 md:py-32 bg-zinc-950 text-white">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,7 +57,7 @@ export default function Benefits() {
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
             Por que escolher a Ovídio Academy?
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">
             Oferecemos uma experiência de aprendizado completa, desenhada para o seu sucesso.
           </p>
         </motion.div>
@@ -70,7 +70,7 @@ export default function Benefits() {
         >
           {benefits.map((benefit, index) => (
             <motion.div key={index} variants={cardVariants}>
-              <Card className="h-full text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+              <Card className="h-full text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-white/5 backdrop-blur-sm border-primary/20 shadow-lg text-white">
                 <CardHeader>
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary">
@@ -80,7 +80,7 @@ export default function Benefits() {
                   <CardTitle className="mt-4">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{benefit.description}</p>
+                  <p className="text-white/70">{benefit.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
