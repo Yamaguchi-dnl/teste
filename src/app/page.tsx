@@ -2,6 +2,7 @@ import Header from '@/components/landing/header';
 import Hero from '@/components/landing/hero';
 import Benefits from '@/components/landing/benefits';
 import Methodology from '@/components/landing/methodology';
+import PresentationVideo from '@/components/landing/presentation-video';
 import Testimonials from '@/components/landing/testimonials';
 import Pricing from '@/components/landing/pricing';
 import ContactForm from '@/components/landing/contact-form';
@@ -15,6 +16,7 @@ export default function Home() {
         <Hero />
         <Benefits />
         <Methodology />
+        <PresentationVideo />
         <Testimonials />
         <Pricing />
         <ContactForm />
