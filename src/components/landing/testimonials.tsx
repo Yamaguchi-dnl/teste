@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -9,26 +8,27 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { Star } from "lucide-react";
 
 const testimonials = [
   {
     name: "Ana Silva",
-    image: "https://placehold.co/100x100.png",
-    quote: "A Ovídio Academy transformou minha forma de aprender inglês. As aulas são super dinâmicas e os professores incríveis!",
+    role: "Aluna de Inglês",
+    quote: "A Ovídio Academy transformou minha forma de aprender. As aulas são super dinâmicas e os professores incríveis!",
   },
   {
     name: "João Pereira",
-    image: "https://placehold.co/100x100.png",
-    quote: "Finalmente perdi o medo de falar espanhol. A metodologia focada em conversação faz toda a diferença.",
+    role: "Aluno de Espanhol",
+    quote: "Finalmente perdi o medo de falar. A metodologia focada em conversação faz toda a diferença.",
   },
   {
     name: "Mariana Costa",
-    image: "https://placehold.co/100x100.png",
-    quote: "Estudei francês para uma viagem e foi a melhor decisão! Cheguei lá super confiante para me comunicar.",
+    role: "Aluna de Francês",
+    quote: "Estudei para uma viagem e foi a melhor decisão! Cheguei lá super confiante para me comunicar.",
   },
   {
     name: "Carlos Andrade",
-    image: "https://placehold.co/100x100.png",
+    role: "Aluno Corporativo",
     quote: "A flexibilidade das aulas online foi perfeita para minha rotina. Qualidade de ensino nota 10!",
   },
 ];
@@ -50,25 +50,23 @@ export default function Testimonials() {
             align: "start",
             loop: true,
           }}
-          className="w-full max-w-4xl mx-auto mt-12"
+          className="w-full max-w-5xl mx-auto mt-16"
         >
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <div className="p-1 h-full">
-                  <Card className="futuristic-card h-full text-white bg-transparent border-0 shadow-none">
-                    <CardContent className="flex flex-col items-center text-center p-6 h-full justify-center">
-                      <Image
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        width={80}
-                        height={80}
-                        className="rounded-full mb-4 border-2 border-primary"
-                        data-ai-hint="person"
-                      />
-                      <p className="text-white/70 italic flex-1">"{testimonial.quote}"</p>
-                      <p className="mt-4 font-bold text-white">{testimonial.name}</p>
+              <CarouselItem key={index} className="md:basis-1/2">
+                <div className="p-4 h-full">
+                  <Card className="futuristic-card h-full text-white bg-transparent border-0 shadow-none p-6 flex flex-col justify-between">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-primary text-primary" />)}
+                    </div>
+                    <CardContent className="p-0 flex-1">
+                      <p className="text-white/80 italic text-lg">"{testimonial.quote}"</p>
                     </CardContent>
+                    <div className="mt-6">
+                      <p className="font-bold text-white text-xl">{testimonial.name}</p>
+                      <p className="text-primary font-medium">{testimonial.role}</p>
+                    </div>
                   </Card>
                 </div>
               </CarouselItem>
