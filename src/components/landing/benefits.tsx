@@ -62,7 +62,7 @@ export default function Benefits() {
           </p>
         </motion.div>
         <motion.div
-          className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid gap-8 md:grid-cols-1 lg:max-w-4xl mx-auto"
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.2 }}
@@ -70,18 +70,20 @@ export default function Benefits() {
         >
           {benefits.map((benefit, index) => (
             <motion.div key={index} variants={cardVariants}>
-              <Card className="futuristic-card h-full text-center bg-transparent border-0 shadow-none text-white">
-                <CardHeader>
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary">
-                       {benefit.icon}
+              <Card className="futuristic-card h-full text-left bg-transparent border-0 shadow-none text-white p-6 md:p-8">
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+                  <div className="flex-shrink-0">
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary">
+                         {benefit.icon}
+                      </div>
                     </div>
                   </div>
-                  <CardTitle className="mt-4">{benefit.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-white/70">{benefit.description}</p>
-                </CardContent>
+                  <div className="flex-1">
+                    <CardTitle>{benefit.title}</CardTitle>
+                    <p className="text-white/70 mt-2">{benefit.description}</p>
+                  </div>
+                </div>
               </Card>
             </motion.div>
           ))}
