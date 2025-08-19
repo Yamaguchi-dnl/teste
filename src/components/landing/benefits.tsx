@@ -45,7 +45,7 @@ const cardVariants = {
 
 export default function Benefits() {
   return (
-    <section id="beneficios" className="py-20 md:py-32 bg-zinc-950 text-white">
+    <section id="beneficios" className="py-20 md:py-32 bg-zinc-950 text-white dark-section">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

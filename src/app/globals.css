@@ -97,4 +97,9 @@
   .futuristic-card:hover::before {
     background: linear-gradient(135deg, hsl(var(--primary) / 1), transparent 50%);
   }
+
+  .dark-section {
+    background-image: url('/texture.png');
+    background-blend-mode: overlay;
+  }
 }
