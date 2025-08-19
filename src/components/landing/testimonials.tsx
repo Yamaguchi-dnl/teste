@@ -56,7 +56,7 @@ export default function Testimonials() {
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
-                  <Card className="bg-white/5 backdrop-blur-sm border-primary/20 shadow-lg h-full text-white">
+                  <Card className="futuristic-card h-full text-white bg-transparent border-0 shadow-none">
                     <CardContent className="flex flex-col items-center text-center p-6 h-full justify-center">
                       <Image
                         src={testimonial.image}

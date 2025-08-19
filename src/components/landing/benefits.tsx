@@ -70,7 +70,7 @@ export default function Benefits() {
         >
           {benefits.map((benefit, index) => (
             <motion.div key={index} variants={cardVariants}>
-              <Card className="h-full text-center hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 bg-white/5 backdrop-blur-sm border-primary/20 shadow-lg text-white">
+              <Card className="futuristic-card h-full text-center bg-transparent border-0 shadow-none text-white">
                 <CardHeader>
                   <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary">

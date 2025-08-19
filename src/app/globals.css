@@ -65,3 +65,19 @@
     @apply bg-secondary;
   }
 }
+
+@layer components {
+  .futuristic-card {
+    position: relative;
+    background-color: hsl(var(--primary) / 0.05);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    backdrop-filter: blur(4px);
+    clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    transition: all 0.3s ease;
+  }
+  .futuristic-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    background-color: hsl(var(--primary) / 0.1);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+}

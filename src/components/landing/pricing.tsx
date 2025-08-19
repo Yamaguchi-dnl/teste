@@ -59,8 +59,8 @@ export default function Pricing() {
             <Card
               key={plan.name}
               className={cn(
-                "flex flex-col h-full transition-transform duration-300 hover:scale-105 hover:shadow-2xl",
-                plan.isFeatured && "border-2 border-primary shadow-2xl scale-105 relative"
+                "futuristic-card flex flex-col h-full bg-card shadow-lg",
+                plan.isFeatured && "border-2 border-primary scale-105 relative"
               )}
             >
               {plan.isFeatured && (
