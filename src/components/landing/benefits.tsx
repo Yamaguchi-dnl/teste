@@ -64,7 +64,7 @@ export default function Benefits() {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className={cn(
                                 "border rounded-2xl p-8 shadow-lg transition-all duration-300 ease-in-out relative z-10",
-                                isDark ? "bg-foreground text-background" : "bg-card text-card-foreground",
+                                isDark ? "bg-black text-white" : "bg-card text-card-foreground",
                                 "hover:!opacity-100 hover:scale-105 hover:-translate-y-4 hover:!z-50",
                                 "lg:[&:not(:first-child)]:-ml-12",
                                 "group-hover:opacity-60"
@@ -74,14 +74,14 @@ export default function Benefits() {
                                 <div className="flex-shrink-0">
                                     <div className={cn(
                                         "mx-auto flex h-16 w-16 items-center justify-center rounded-2xl",
-                                        isDark ? "bg-background/10" : "bg-primary/10"
+                                        isDark ? "bg-white/10" : "bg-primary/10"
                                     )}>
                                         {benefit.icon(isDark)}
                                     </div>
                                 </div>
                                 <div className="flex-1">
-                                    <CardTitle className={cn(isDark ? "text-background" : "text-foreground")}>{benefit.title}</CardTitle>
-                                    <p className={cn("mt-2", isDark ? "text-background/80" : "text-muted-foreground")}>{benefit.description}</p>
+                                    <CardTitle className={cn(isDark ? "text-white" : "text-foreground")}>{benefit.title}</CardTitle>
+                                    <p className={cn("mt-2", isDark ? "text-white/80" : "text-muted-foreground")}>{benefit.description}</p>
                                 </div>
                             </div>
                         </motion.div>
