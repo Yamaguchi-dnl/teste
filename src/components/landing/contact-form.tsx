@@ -7,7 +7,6 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 
@@ -15,7 +14,6 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
   email: z.string().email({ message: "Por favor, insira um e-mail válido." }),
   whatsapp: z.string().min(10, { message: "Número de WhatsApp inválido." }),
-  language: z.string({ required_error: "Por favor, selecione um idioma." }),
 });
 
 export default function ContactForm() {
@@ -40,7 +38,7 @@ export default function ContactForm() {
       setIsLoading(false);
       toast({
         title: "Inscrição recebida!",
-        description: "Entraremos em contato em breve. Obrigado!",
+        description: "Entraremos em contato em breve para falar sobre o curso de alemão. Danke!",
       });
       form.reset();
     }, 2000);
@@ -52,7 +50,7 @@ export default function ContactForm() {
         <div className="max-w-xl mx-auto bg-background p-8 md:p-12 rounded-2xl shadow-2xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline text-foreground">
-              Comece a aprender agora!
+              Comece a falar alemão agora!
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
               Preencha o formulário e nossa equipe entrará em contato.
@@ -99,32 +97,9 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="language"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Idioma de Interesse</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecione um idioma" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="ingles">Inglês</SelectItem>
-                        <SelectItem value="espanhol">Espanhol</SelectItem>
-                        <SelectItem value="frances">Francês</SelectItem>
-                        <SelectItem value="alemao">Alemão</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <Button type="submit" disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-6">
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Quero me inscrever
+                Quero ser fluente em alemão
               </Button>
             </form>
           </Form>

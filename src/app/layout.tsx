@@ -10,8 +10,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Ovídio Academy',
-  description: 'Aprenda Idiomas de Forma Dinâmica e Moderna',
+  title: 'Ovídio Academy - Aprenda Alemão',
+  description: 'Sua jornada para a fluência em alemão começa aqui. Metodologia moderna e professores certificados.',
 };
 
 export default function RootLayout({

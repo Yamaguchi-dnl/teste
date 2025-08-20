@@ -25,7 +25,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl font-headline"
           >
-            Aprenda Idiomas de Forma Dinâmica e Moderna
+            Fale Alemão com Confiança e Fluidez
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -33,7 +33,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
             className="mt-6 text-lg md:text-xl text-muted-foreground"
           >
-            Professores certificados, metodologia exclusiva e aulas presenciais ou online.
+            Professores nativos, metodologia imersiva e aulas focadas em conversação.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -51,12 +51,12 @@ export default function Hero() {
           <motion.div className="relative h-full w-full" style={{ y: imageY }}>
             <Image
               src="https://placehold.co/1000x1200.png"
-              alt="Estudantes felizes aprendendo idiomas"
+              alt="Estudantes felizes aprendendo alemão"
               fill
               style={{ objectFit: 'cover' }}
               className="clip-path-hero"
               priority
-              data-ai-hint="happy students"
+              data-ai-hint="happy students germany"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/50 to-transparent md:bg-gradient-to-r md:from-background md:via-background/50 md:to-transparent"></div>
              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent md:hidden"></div>

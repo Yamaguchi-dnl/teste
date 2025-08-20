@@ -7,23 +7,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const benefits = [
   {
     icon: <BookOpen className="h-8 w-8 text-primary-foreground" />,
-    title: "Metodologia Exclusiva",
-    description: "Nossa abordagem única acelera seu aprendizado e foca na conversação desde o primeiro dia.",
+    title: "Metodologia Imersiva",
+    description: "Nossa abordagem foca na conversação em alemão desde o primeiro dia, acelerando seu aprendizado.",
   },
   {
     icon: <Users className="h-8 w-8 text-primary-foreground" />,
-    title: "Professores Certificados",
-    description: "Aprenda com especialistas nativos e certificados, apaixonados por ensinar.",
+    title: "Professores Nativos",
+    description: "Aprenda com especialistas nativos da Alemanha, certificados e apaixonados por ensinar.",
   },
   {
     icon: <Globe className="h-8 w-8 text-primary-foreground" />,
-    title: "Aulas Online e Presenciais",
-    description: "Flexibilidade total para você estudar onde e quando quiser, no seu ritmo.",
+    title: "Flexibilidade Total",
+    description: "Estude no seu ritmo com aulas online ao vivo que se encaixam na sua rotina.",
   },
   {
     icon: <Award className="h-8 w-8 text-primary-foreground" />,
-    title: "Certificação Internacional",
-    description: "Receba um certificado reconhecido que comprova sua fluência e abre portas no mercado.",
+    title: "Preparatório para Certificados",
+    description: "Oferecemos preparatório completo para exames de proficiência como o Goethe-Zertifikat.",
   },
 ];
 
@@ -55,10 +55,10 @@ export default function Benefits() {
           className="text-center"
         >
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
-            Por que escolher a Ovídio Academy?
+            Por que aprender alemão na Ovídio Academy?
           </h2>
           <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">
-            Oferecemos uma experiência de aprendizado completa, desenhada para o seu sucesso.
+            Oferecemos uma experiência de aprendizado completa, desenhada para a sua fluência em alemão.
           </p>
         </motion.div>
         <motion.div
