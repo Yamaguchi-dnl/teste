@@ -56,7 +56,7 @@ export default function Testimonials() {
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="md:basis-1/2">
                 <div className="p-4 h-full">
-                  <Card className="futuristic-card h-full text-white bg-transparent border-0 shadow-none p-6 flex flex-col justify-between">
+                  <Card className="h-full text-white bg-white/5 border border-white/10 shadow-lg rounded-2xl p-6 flex flex-col justify-between">
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-primary text-primary" />)}
                     </div>
