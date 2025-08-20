@@ -106,9 +106,8 @@
   .hero-section-video {
     background-color: #0a0a0a;
     background-image:
-      radial-gradient(ellipse 80% 50% at 80% 5%, hsl(var(--primary) / 0.15), transparent),
-      radial-gradient(circle at 0 0, hsla(0,0%,100%,0.03) 0, transparent 40%),
-      repeating-linear-gradient(to right, hsla(0, 0%, 100%, 0.02) 0, hsla(0, 0%, 100%, 0.02) 1px, transparent 1px, transparent 40px),
-      repeating-linear-gradient(to bottom, hsla(0, 0%, 100%, 0.02) 0, hsla(0, 0%, 100%, 0.02) 1px, transparent 1px, transparent 40px);
+      radial-gradient(ellipse 100% 100% at 100% 0, hsla(var(--primary), 0.1) 0%, transparent 50%),
+      repeating-linear-gradient(to right, hsla(var(--primary), 0.15) 0, hsla(var(--primary), 0.15) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(to bottom, hsla(var(--primary), 0.15) 0, hsla(var(--primary), 0.15) 1px, transparent 1px, transparent 40px);
   }
 }
