@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, Globe, Users, Award } from "lucide-react";
+import { BookOpen, Globe, Users, Award, Zap } from "lucide-react";
 import { CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -37,9 +37,13 @@ export default function Benefits() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center"
+          className="text-center flex flex-col items-center"
         >
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground shadow-md">
+            <Zap className="h-4 w-4 text-primary" />
+            Nossa Abordagem
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
             Por que aprender alemão na Ovídio Academy?
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -58,9 +62,9 @@ export default function Benefits() {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         className={cn(
                             "bg-card border rounded-2xl p-8 shadow-lg transition-all duration-300 ease-in-out relative z-10",
-                            "hover:!opacity-100 hover:scale-105 hover:!z-50",
-                            "even:mt-8 even:md:mt-0 lg:even:mt-8", // Staggered effect
-                            "odd:mb-8 odd:md:mb-0 lg:odd:mb-8"
+                            "hover:!opacity-100 hover:scale-105 hover:-translate-y-4 hover:!z-50",
+                            "lg:[&:not(:first-child)]:-ml-12",
+                            "group-hover:opacity-60"
                         )}
                     >
                         <div className="flex flex-col items-start gap-6">
