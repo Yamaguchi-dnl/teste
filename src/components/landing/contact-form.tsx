@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Rocket } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "O nome deve ter pelo menos 2 caracteres." }),
@@ -49,6 +49,10 @@ export default function ContactForm() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-xl mx-auto bg-card border p-8 md:p-12 rounded-2xl shadow-2xl">
           <div className="text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground shadow-md">
+              <Rocket className="h-4 w-4 text-primary" />
+              Seu Futuro Começa Agora
+            </div>
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline text-foreground">
               Comece a falar alemão agora!
             </h2>

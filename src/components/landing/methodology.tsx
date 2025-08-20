@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ClipboardCheck, BookUser, MessageSquareHeart, GraduationCap } from "lucide-react";
+import { ClipboardCheck, BookUser, MessageSquareHeart, GraduationCap, Workflow } from "lucide-react";
 
 const steps = [
   {
@@ -37,6 +37,10 @@ export default function Methodology() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground shadow-md">
+            <Workflow className="h-4 w-4 text-primary" />
+            Passo a Passo
+          </div>
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
             Nossa Metodologia em 4 Passos
           </h2>
@@ -95,3 +99,4 @@ export default function Methodology() {
       </div>
     </section>
   );
+}

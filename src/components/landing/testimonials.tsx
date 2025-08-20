@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, MessageCircle } from "lucide-react";
 
 const testimonials = [
   {
@@ -38,6 +38,10 @@ export default function Testimonials() {
     <section id="depoimentos" className="py-20 md:py-32 bg-background text-foreground">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-secondary-foreground shadow-md">
+            <MessageCircle className="h-4 w-4 text-primary" />
+            Vozes de Sucesso
+          </div>
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
             O que nossos alunos de alemão dizem
           </h2>
