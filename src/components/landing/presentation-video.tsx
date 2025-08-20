@@ -34,7 +34,7 @@ const FuturistLine = ({ reverse = false, className }: { reverse?: boolean, class
 
 export default function PresentationVideo() {
   return (
-    <section id="apresentacao" className="py-20 md:py-32 bg-zinc-950 text-white overflow-hidden dark-section">
+    <section id="apresentacao" className="py-20 md:py-32 bg-zinc-950 text-white overflow-hidden hero-section-video">
       <div className="container mx-auto px-4 md:px-6 flex flex-col items-center">
         
         <motion.div
