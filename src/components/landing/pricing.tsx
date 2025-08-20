@@ -33,16 +33,13 @@ export default function Pricing() {
           </p>
         </div>
         <div className="flex justify-center mt-12">
-          <Card
-            className={cn(
-              "futuristic-card flex flex-col h-full bg-transparent border-0 shadow-none text-white w-full max-w-lg",
-              "scale-105 relative"
-            )}
-          >
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-bold">
-              OFERTA ÚNICA
+          <Card className="w-full max-w-lg bg-white/5 border-white/10 shadow-lg rounded-2xl">
+            <div className="p-6 relative">
+                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-bold">
+                    OFERTA ÚNICA
+                </div>
             </div>
-            <CardHeader className="p-8">
+            <CardHeader className="p-8 pt-4">
               <CardTitle className="text-2xl">{plan.name}</CardTitle>
               <CardDescription className="text-white/70">{plan.description}</CardDescription>
             </CardHeader>
