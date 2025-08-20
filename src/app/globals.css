@@ -101,13 +101,12 @@
   .dark-section {
     background-image: url('https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1.png');
     background-blend-mode: overlay;
+    background-color: #0a0a0a;
   }
 
   .hero-section-video {
     background-color: #0a0a0a;
-    background-image:
-      radial-gradient(ellipse 100% 100% at 100% 0, hsla(var(--primary), 0.1) 0%, transparent 50%),
-      repeating-linear-gradient(to right, hsla(var(--primary), 0.15) 0, hsla(var(--primary), 0.15) 1px, transparent 1px, transparent 40px),
-      repeating-linear-gradient(to bottom, hsla(var(--primary), 0.15) 0, hsla(var(--primary), 0.15) 1px, transparent 1px, transparent 40px);
+    background-image: url('https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1.png');
+    background-blend-mode: overlay;
   }
 }
