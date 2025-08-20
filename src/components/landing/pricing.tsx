@@ -44,7 +44,7 @@ export default function Pricing() {
                 </div>
             </div>
             <CardHeader className="p-8 pt-4">
-              <CardTitle className="text-2xl">{plan.name}</CardTitle>
+              <CardTitle className="text-2xl text-white">{plan.name}</CardTitle>
               <CardDescription className="text-white/70">{plan.description}</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 p-8 pt-0">
