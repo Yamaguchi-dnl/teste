@@ -35,13 +35,13 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="depoimentos" className="py-20 md:py-32 bg-zinc-950 text-white dark-section">
+    <section id="depoimentos" className="py-20 md:py-32 bg-background text-foreground">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
             O que nossos alunos de alemão dizem
           </h2>
-          <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Histórias de sucesso que nos inspiram todos os dias.
           </p>
         </div>
@@ -56,15 +56,15 @@ export default function Testimonials() {
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="md:basis-1/2">
                 <div className="p-4 h-full">
-                  <Card className="h-full text-white bg-white/5 border border-white/10 shadow-lg p-6 flex flex-col justify-between rounded-tr-2xl rounded-bl-2xl">
+                  <Card className="h-full bg-card shadow-lg p-6 flex flex-col justify-between rounded-tr-2xl rounded-bl-2xl">
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-primary text-primary" />)}
                     </div>
                     <CardContent className="p-0 flex-1">
-                      <p className="text-white/80 italic text-lg">"{testimonial.quote}"</p>
+                      <p className="text-muted-foreground italic text-lg">"{testimonial.quote}"</p>
                     </CardContent>
                     <div className="mt-6">
-                      <p className="font-bold text-white text-xl">{testimonial.name}</p>
+                      <p className="font-bold text-foreground text-xl">{testimonial.name}</p>
                       <p className="text-primary font-medium">{testimonial.role}</p>
                     </div>
                   </Card>
@@ -72,8 +72,8 @@ export default function Testimonials() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex text-white border-white/20 hover:bg-white/10" />
-          <CarouselNext className="hidden md:flex text-white border-white/20 hover:bg-white/10" />
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
         </Carousel>
       </div>
     </section>
