@@ -22,7 +22,7 @@ const plan = {
 
 export default function Pricing() {
   return (
-    <section id="planos" className="py-20 md:py-32 bg-zinc-950 text-white dark-section">
+    <section id="planos" className="w-full py-20 md:py-32 bg-zinc-950 text-white dark-section">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-white shadow-lg backdrop-blur-lg">

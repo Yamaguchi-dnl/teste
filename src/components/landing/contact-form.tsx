@@ -45,7 +45,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contato" className="py-20 md:py-32 bg-background">
+    <section id="contato" className="w-full py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-xl mx-auto bg-card border p-8 md:p-12 rounded-2xl shadow-2xl">
           <div className="text-center">
