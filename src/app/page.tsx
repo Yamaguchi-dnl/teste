@@ -16,7 +16,7 @@ export default function Home() {
         <Hero />
         <Benefits />
         <Methodology />
-        <PresentationVideo backgroundImageUrl="https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(5).png" />
+        <PresentationVideo backgroundImageUrl="https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1.png" />
         <Testimonials />
         <Pricing />
         <ContactForm />
