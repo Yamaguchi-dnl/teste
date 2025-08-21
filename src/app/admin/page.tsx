@@ -1,9 +1,9 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "@/lib/firebase";
+import { db } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,7 +21,6 @@ interface HeroContent {
 
 export default function AdminPage() {
   const [heroContent, setHeroContent] = useState<HeroContent>({ title: "", subtitle: "", imageUrl: "" });
-  const [newImage, setNewImage] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
@@ -60,26 +59,10 @@ export default function AdminPage() {
     setHeroContent(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setNewImage(e.target.files[0]);
-    }
-  };
-
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      let imageUrl = heroContent.imageUrl;
-      if (newImage) {
-        const storageRef = ref(storage, `hero/${newImage.name}`);
-        const snapshot = await uploadBytes(storageRef, newImage);
-        imageUrl = await getDownloadURL(snapshot.ref);
-      }
-
-      const contentToSave = { ...heroContent, imageUrl };
-      await setDoc(doc(db, "siteContent", "hero"), contentToSave);
-      setHeroContent(contentToSave);
-
+      await setDoc(doc(db, "siteContent", "hero"), heroContent);
       toast({
         title: "Sucesso!",
         description: "Conteúdo da seção Hero atualizado com sucesso.",
@@ -93,7 +76,6 @@ export default function AdminPage() {
       });
     } finally {
       setIsSaving(false);
-      setNewImage(null);
     }
   };
 
@@ -124,16 +106,12 @@ export default function AdminPage() {
             <Textarea id="subtitle" name="subtitle" value={heroContent.subtitle} onChange={handleInputChange} rows={3} />
           </div>
           <div>
-            <Label htmlFor="image">Imagem de Fundo</Label>
-            <Input id="image" type="file" onChange={handleImageChange} accept="image/*" />
+            <Label htmlFor="imageUrl">URL da Imagem de Fundo</Label>
+            <Input id="imageUrl" name="imageUrl" type="text" value={heroContent.imageUrl} onChange={handleInputChange} placeholder="https://exemplo.com/imagem.png"/>
             <div className="mt-4">
               <p className="text-sm text-gray-500 mb-2">Pré-visualização:</p>
               <div className="w-full max-w-sm aspect-video relative rounded-md overflow-hidden bg-gray-100">
-                {newImage ? (
-                  <Image src={URL.createObjectURL(newImage)} alt="Nova pré-visualização" fill className="object-cover" />
-                ) : (
-                  heroContent.imageUrl && <Image src={heroContent.imageUrl} alt="Imagem atual" fill className="object-cover" />
-                )}
+                {heroContent.imageUrl && <Image src={heroContent.imageUrl} alt="Imagem atual" fill className="object-cover" />}
               </div>
             </div>
           </div>

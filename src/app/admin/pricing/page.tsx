@@ -3,8 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "@/lib/firebase";
+import { db } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,7 +20,6 @@ const IMAGE_ID = "pricing";
 
 export default function AdminPricingPage() {
   const [content, setContent] = useState<ImageContent>({ url: "" });
-  const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
@@ -51,32 +49,15 @@ export default function AdminPricingPage() {
     fetchImageContent();
   }, [toast]);
   
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setNewImageFile(e.target.files[0]);
-    }
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setContent({ url: e.target.value });
   };
 
   const handleSave = async () => {
-    if (!newImageFile) {
-        toast({
-            variant: "destructive",
-            title: "Nenhuma imagem selecionada",
-            description: "Por favor, selecione uma imagem para fazer o upload.",
-        });
-        return;
-    }
     setIsSaving(true);
     try {
-      const storageRef = ref(storage, `site-images/${IMAGE_ID}-${newImageFile.name}`);
-      const snapshot = await uploadBytes(storageRef, newImageFile);
-      const imageUrl = await getDownloadURL(snapshot.ref);
-
-      const contentToSave = { url: imageUrl };
-      await setDoc(doc(db, "siteContent", "images", "items", IMAGE_ID), contentToSave);
+      await setDoc(doc(db, "siteContent", "images", "items", IMAGE_ID), content);
       
-      setContent(contentToSave);
-
       toast({
         title: "Sucesso!",
         description: `Imagem da seção de Planos atualizada.`,
@@ -91,7 +72,6 @@ export default function AdminPricingPage() {
       });
     } finally {
       setIsSaving(false);
-      setNewImageFile(null);
     }
   };
 
@@ -114,17 +94,13 @@ export default function AdminPricingPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor={`image-${IMAGE_ID}`}>Nova Imagem</Label>
-            <Input id={`image-${IMAGE_ID}`} type="file" onChange={handleImageChange} accept="image/*" />
+            <Label htmlFor={`imageUrl-${IMAGE_ID}`}>URL da Nova Imagem</Label>
+            <Input id={`imageUrl-${IMAGE_ID}`} type="text" value={content.url} onChange={handleUrlChange} placeholder="https://exemplo.com/imagem.png" />
           </div>
           <div className="mt-4">
             <p className="text-sm text-gray-500 mb-2">Pré-visualização:</p>
             <div className="w-full max-w-sm aspect-video relative rounded-md overflow-hidden bg-gray-100">
-                {newImageFile ? (
-                    <Image src={URL.createObjectURL(newImageFile)} alt="Nova pré-visualização" fill className="object-cover" />
-                ) : (
-                    content.url && <Image src={content.url} alt="Imagem atual" fill className="object-cover" />
-                )}
+                {content.url && <Image src={content.url} alt="Imagem atual" fill className="object-cover" />}
             </div>
           </div>
           <Button onClick={handleSave} disabled={isSaving}>

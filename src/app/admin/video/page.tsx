@@ -3,8 +3,7 @@
 
 import { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db, storage } from "@/lib/firebase";
+import { db } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,7 +23,6 @@ const CONTENT_ID = "presentationVideo";
 
 export default function AdminVideoPage() {
   const [content, setContent] = useState<VideoContent>({ title: "", subtitle: "", imageUrl: "" });
-  const [newImageFile, setNewImageFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
@@ -63,27 +61,11 @@ export default function AdminVideoPage() {
     setContent(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setNewImageFile(e.target.files[0]);
-    }
-  };
-
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      let imageUrl = content.imageUrl;
-      if (newImageFile) {
-          const storageRef = ref(storage, `site-images/${CONTENT_ID}-${newImageFile.name}`);
-          const snapshot = await uploadBytes(storageRef, newImageFile);
-          imageUrl = await getDownloadURL(snapshot.ref);
-      }
-
-      const contentToSave = { ...content, imageUrl };
-      await setDoc(doc(db, "siteContent", CONTENT_ID), contentToSave);
+      await setDoc(doc(db, "siteContent", CONTENT_ID), content);
       
-      setContent(contentToSave);
-
       toast({
         title: "Sucesso!",
         description: `Conteúdo da seção 'Vídeo de Apresentação' atualizado.`,
@@ -98,7 +80,6 @@ export default function AdminVideoPage() {
       });
     } finally {
       setIsSaving(false);
-      setNewImageFile(null);
     }
   };
 
@@ -129,17 +110,13 @@ export default function AdminVideoPage() {
             <Textarea id="subtitle" name="subtitle" value={content.subtitle} onChange={handleInputChange} />
           </div>
           <div>
-            <Label htmlFor={`image-${CONTENT_ID}`}>Imagem de Fundo</Label>
-            <Input id={`image-${CONTENT_ID}`} type="file" onChange={handleImageChange} accept="image/*" />
+            <Label htmlFor="imageUrl">URL da Imagem de Fundo</Label>
+            <Input id="imageUrl" name="imageUrl" type="text" value={content.imageUrl} onChange={handleInputChange} placeholder="https://exemplo.com/imagem.png"/>
           </div>
           <div className="mt-4">
             <p className="text-sm text-gray-500 mb-2">Pré-visualização da Imagem:</p>
             <div className="w-full max-w-sm aspect-video relative rounded-md overflow-hidden bg-gray-100">
-                {newImageFile ? (
-                    <Image src={URL.createObjectURL(newImageFile)} alt="Nova pré-visualização" fill className="object-cover" />
-                ) : (
-                    content.imageUrl && <Image src={content.imageUrl} alt="Imagem atual" fill className="object-cover" />
-                )}
+                {content.imageUrl && <Image src={content.imageUrl} alt="Imagem atual" fill className="object-cover" />}
             </div>
           </div>
           <Button onClick={handleSave} disabled={isSaving}>
