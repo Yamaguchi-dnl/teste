@@ -1,10 +1,15 @@
+
 "use client";
 
-import { Check, ArrowRight, Package } from "lucide-react";
+import { Check, ArrowRight, Package, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+
 
 const plan = {
   name: "Curso Completo de Alemão",
@@ -22,17 +27,49 @@ const plan = {
 };
 
 export default function Pricing() {
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const docRef = doc(db, "siteContent", "images", "pricing");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists() && docSnap.data().url) {
+          setBackgroundImageUrl(docSnap.data().url);
+        } else {
+          const defaultUrl = "https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(7).png";
+          await setDoc(docRef, { url: defaultUrl });
+          setBackgroundImageUrl(defaultUrl);
+        }
+      } catch (error) {
+        console.error("Error fetching pricing background:", error);
+        setBackgroundImageUrl("https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(7).png");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchImage();
+  }, []);
+
   return (
     <section id="planos" className="relative w-full py-20 md:py-32 text-white overflow-hidden">
-       <Image
-        src="https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(7).png"
-        alt="Imagem de fundo da seção de preços"
-        layout="fill"
-        objectFit="cover"
-        className="absolute inset-0 z-0"
-        data-ai-hint="abstract background"
-        quality={100}
-      />
+       {isLoading || !backgroundImageUrl ? (
+        <div className="absolute inset-0 bg-black/60 z-10 flex items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      ) : (
+        <Image
+          src={backgroundImageUrl}
+          alt="Imagem de fundo da seção de preços"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0 z-0"
+          data-ai-hint="abstract background"
+          quality={100}
+        />
+      )}
       <div className="absolute inset-0 bg-black/60 z-0" />
 
       <div className="container relative z-10 mx-auto px-4 md:px-6">
