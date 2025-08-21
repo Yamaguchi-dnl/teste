@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import Sidebar from "./Sidebar";
@@ -9,12 +9,18 @@ import Sidebar from "./Sidebar";
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!loading && !user) {
       router.push("/admin/login");
     }
   }, [user, loading, router]);
+
+  // If it's the login page, don't render the protected layout
+  if (pathname === "/admin/login") {
+    return <>{children}</>;
+  }
 
   if (loading || !user) {
     return (
@@ -27,7 +33,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 bg-gray-50">
         {children}
       </main>
     </div>
