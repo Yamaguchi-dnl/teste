@@ -65,7 +65,7 @@ export default function Benefits() {
                             className={cn(
                                 "border rounded-2xl p-8 shadow-lg transition-all duration-300 ease-in-out relative z-10",
                                 isDark ? "bg-zinc-900 text-white" : "bg-card text-card-foreground",
-                                "hover:!opacity-100 hover:scale-105 hover:-translate-y-4 hover:!z-50",
+                                "hover:!opacity-100 hover:scale-105 hover:-translate-y-4 hover:z-50",
                                 "lg:[&:not(:first-child)]:-ml-12",
                                 "group-hover:opacity-60"
                             )}
