@@ -7,22 +7,22 @@ import { cn } from "@/lib/utils";
 
 const benefits = [
   {
-    icon: () => <BookOpen className="h-8 w-8 text-primary" />,
+    icon: (className?: string) => <BookOpen className={cn("h-8 w-8", className)} />,
     title: "Metodologia Imersiva",
     description: "Nossa abordagem foca na conversação em alemão desde o primeiro dia, acelerando seu aprendizado.",
   },
   {
-    icon: () => <Users className="h-8 w-8 text-primary" />,
+    icon: (className?: string) => <Users className={cn("h-8 w-8", className)} />,
     title: "Professores Nativos",
     description: "Aprenda com especialistas nativos da Alemanha, certificados e apaixonados por ensinar.",
   },
   {
-    icon: () => <Globe className="h-8 w-8 text-primary" />,
+    icon: (className?: string) => <Globe className={cn("h-8 w-8", className)} />,
     title: "Flexibilidade Total",
     description: "Estude no seu ritmo com aulas online ao vivo que se encaixam na sua rotina.",
   },
   {
-    icon: () => <Award className="h-8 w-8 text-primary" />,
+    icon: (className?: string) => <Award className={cn("h-8 w-8", className)} />,
     title: "Preparatório para Certificados",
     description: "Oferecemos preparatório completo para exames de proficiência como o Goethe-Zertifikat.",
   },
@@ -75,7 +75,7 @@ export default function Benefits() {
                                         "mx-auto flex h-16 w-16 items-center justify-center rounded-2xl",
                                         "bg-primary/10"
                                     )}>
-                                        {benefit.icon()}
+                                        {benefit.icon(isDark ? "text-primary" : "text-foreground")}
                                     </div>
                                 </div>
                                 <div className="flex-1">
