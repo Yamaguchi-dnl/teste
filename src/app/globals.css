@@ -68,14 +68,14 @@
 
 @layer components {
   .dark-section {
-    background-image: url('https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(1).png');
+    background-image: url('https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(6).png');
     background-blend-mode: overlay;
     background-color: #0a0a0a;
   }
 
   .presentation-video-background {
     background-color: #0a0a0a;
-    background-image: url('https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(1).png');
+    background-image: url('https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(6).png');
     background-blend-mode: overlay;
   }
 }
