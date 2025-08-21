@@ -74,7 +74,7 @@ export default function Benefits() {
                                 <div className="flex-shrink-0">
                                     <div className={cn(
                                         "mx-auto flex h-16 w-16 items-center justify-center rounded-2xl",
-                                        isDark ? "bg-white/10" : "bg-primary/10"
+                                        "bg-primary/10"
                                     )}>
                                         {benefit.icon()}
                                     </div>
