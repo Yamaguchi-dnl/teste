@@ -51,6 +51,11 @@ export default function Footer() {
         </div>
         <div className="mt-8 pt-8 border-t border-primary-foreground/20 text-center text-sm text-primary-foreground/60">
           <p>&copy; {new Date().getFullYear()} Ovídio Academy. Todos os direitos reservados.</p>
+          <div className="mt-2">
+            <Link href="/admin/login" className="hover:underline text-xs text-primary-foreground/50 hover:text-primary-foreground">
+              Admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
