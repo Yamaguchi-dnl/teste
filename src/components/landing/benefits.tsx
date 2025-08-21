@@ -1,34 +1,89 @@
+
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpen, Globe, Users, Award, Zap } from "lucide-react";
+import { BookOpen, Globe, Users, Award, Zap, Loader2 } from "lucide-react";
 import { CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
-const benefits = [
+interface Benefit {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+}
+
+const benefitIcons: { [key: string]: (className?: string) => React.ReactNode } = {
+  BookOpen: (className?: string) => <BookOpen className={cn("h-8 w-8", className)} />,
+  Users: (className?: string) => <Users className={cn("h-8 w-8", className)} />,
+  Globe: (className?: string) => <Globe className={cn("h-8 w-8", className)} />,
+  Award: (className?: string) => <Award className={cn("h-8 w-8", className)} />,
+};
+
+const defaultBenefits: Omit<Benefit, 'id'>[] = [
   {
-    icon: (className?: string) => <BookOpen className={cn("h-8 w-8", className)} />,
+    icon: "BookOpen",
     title: "Metodologia Imersiva",
     description: "Nossa abordagem foca na conversação em alemão desde o primeiro dia, acelerando seu aprendizado.",
   },
   {
-    icon: (className?: string) => <Users className={cn("h-8 w-8", className)} />,
+    icon: "Users",
     title: "Professores Nativos",
     description: "Aprenda com especialistas nativos da Alemanha, certificados e apaixonados por ensinar.",
   },
   {
-    icon: (className?: string) => <Globe className={cn("h-8 w-8", className)} />,
+    icon: "Globe",
     title: "Flexibilidade Total",
     description: "Estude no seu ritmo com aulas online ao vivo que se encaixam na sua rotina.",
   },
   {
-    icon: (className?: string) => <Award className={cn("h-8 w-8", className)} />,
+    icon: "Award",
     title: "Preparatório para Certificados",
     description: "Oferecemos preparatório completo para exames de proficiência como o Goethe-Zertifikat.",
   },
 ];
 
+
 export default function Benefits() {
+  const [benefits, setBenefits] = useState<Benefit[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBenefits = async () => {
+      try {
+        const benefitsCollectionRef = collection(db, "siteContent", "benefits", "items");
+        const querySnapshot = await getDocs(benefitsCollectionRef);
+
+        if (querySnapshot.empty) {
+          // If no benefits in Firestore, populate with default and set state
+          const benefitsToCreate = await Promise.all(defaultBenefits.map(async (benefit, index) => {
+            const docId = `benefit${index + 1}`;
+            const docRef = doc(db, "siteContent", "benefits", "items", docId);
+            await setDoc(docRef, benefit);
+            return { id: docId, ...benefit };
+          }));
+          setBenefits(benefitsToCreate);
+        } else {
+          const benefitsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Benefit));
+          benefitsData.sort((a, b) => a.id.localeCompare(b.id)); // Ensure order
+          setBenefits(benefitsData);
+        }
+      } catch (error) {
+        console.error("Error fetching benefits:", error);
+        // Fallback to default benefits on error
+        setBenefits(defaultBenefits.map((b, i) => ({ id: `benefit${i+1}`, ...b })));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBenefits();
+  }, []);
+
+
   return (
     <section id="beneficios" className="w-full py-20 md:py-32 bg-background text-foreground">
       <div className="container mx-auto px-4 md:px-6">
@@ -52,9 +107,15 @@ export default function Benefits() {
         </motion.div>
         
         <div className="mt-20">
+          {isLoading ? (
+             <div className="flex justify-center items-center h-40">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+             </div>
+          ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 group">
                 {benefits.map((benefit, index) => {
                     const isDark = index % 2 !== 0;
+                    const IconComponent = benefitIcons[benefit.icon] || BookOpen;
                     return (
                         <motion.div
                             key={index}
@@ -75,7 +136,7 @@ export default function Benefits() {
                                         "mx-auto flex h-16 w-16 items-center justify-center rounded-2xl",
                                         "bg-primary/10"
                                     )}>
-                                        {benefit.icon(isDark ? "text-primary" : "text-foreground")}
+                                        {IconComponent(isDark ? "text-primary" : "text-foreground")}
                                     </div>
                                 </div>
                                 <div className="flex-1">
@@ -87,6 +148,7 @@ export default function Benefits() {
                     )
                 })}
             </div>
+          )}
         </div>
       </div>
     </section>
