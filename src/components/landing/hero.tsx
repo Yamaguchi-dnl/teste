@@ -4,9 +4,50 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+
+interface HeroContent {
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+}
 
 export default function Hero() {
+  const [content, setContent] = useState<HeroContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const docRef = doc(db, "siteContent", "hero");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setContent(docSnap.data() as HeroContent);
+        } else {
+           // Fallback content if nothing in Firestore
+           setContent({
+            title: "Fale Alemão com Confiança e Fluidez",
+            subtitle: "Professores nativos, metodologia imersiva e aulas focadas em conversação.",
+            imageUrl: "https://placehold.co/1000x1200.png"
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching hero content:", error);
+         // Fallback content on error
+         setContent({
+            title: "Fale Alemão com Confiança e Fluidez",
+            subtitle: "Professores nativos, metodologia imersiva e aulas focadas em conversação.",
+            imageUrl: "https://placehold.co/1000x1200.png"
+          });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchContent();
+  }, []);
+
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -14,6 +55,10 @@ export default function Hero() {
   });
 
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
+  if (isLoading || !content) {
+    return <section id="inicio" className="relative w-full h-screen overflow-hidden bg-background flex items-center justify-center"><div>Carregando...</div></section>;
+  }
 
   return (
     <section id="inicio" ref={targetRef} className="relative w-full h-screen overflow-hidden bg-background">
@@ -25,7 +70,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl font-headline"
           >
-            Fale Alemão com Confiança e Fluidez
+            {content.title}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -33,7 +78,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
             className="mt-6 text-lg md:text-xl text-muted-foreground"
           >
-            Professores nativos, metodologia imersiva e aulas focadas em conversação.
+            {content.subtitle}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -50,7 +95,7 @@ export default function Hero() {
         <div className="absolute top-0 right-0 h-full w-full md:w-1/2">
           <motion.div className="relative h-full w-full" style={{ y: imageY }}>
             <Image
-              src="https://placehold.co/1000x1200.png"
+              src={content.imageUrl}
               alt="Estudantes felizes aprendendo alemão"
               fill
               style={{ objectFit: 'cover' }}
@@ -90,3 +135,4 @@ export default function Hero() {
     </section>
   );
 }
+
