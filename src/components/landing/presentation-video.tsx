@@ -33,7 +33,7 @@ const FuturistLine = ({ reverse = false, className }: { reverse?: boolean, class
 
 
 export default function PresentationVideo({
-  backgroundImageUrl = "https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(6).png"
+  backgroundImageUrl = "https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(7).png"
 }: {
   backgroundImageUrl?: string;
 }) {
@@ -48,7 +48,7 @@ export default function PresentationVideo({
         data-ai-hint="abstract background"
         quality={100}
       />
-      <div className="absolute inset-0 bg-black/70 z-0" />
+      <div className="absolute inset-0 bg-black/60 z-0" />
 
       <div className="container relative z-10 mx-auto px-4 md:px-6 flex flex-col items-center">
         

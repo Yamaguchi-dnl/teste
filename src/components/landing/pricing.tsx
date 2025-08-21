@@ -33,7 +33,7 @@ export default function Pricing() {
         data-ai-hint="abstract background"
         quality={100}
       />
-      <div className="absolute inset-0 bg-black/70 z-0" />
+      <div className="absolute inset-0 bg-black/60 z-0" />
 
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <div className="text-center">
