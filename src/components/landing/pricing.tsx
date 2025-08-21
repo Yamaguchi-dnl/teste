@@ -25,7 +25,7 @@ export default function Pricing() {
     <section id="planos" className="py-20 md:py-32 bg-zinc-950 text-white dark-section">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white shadow-md backdrop-blur-md">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 text-sm font-medium text-white shadow-lg backdrop-blur-xl">
             <Package className="h-4 w-4 text-primary" />
             Acesso Total
           </div>
