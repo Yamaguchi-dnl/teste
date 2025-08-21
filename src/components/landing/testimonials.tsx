@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Star, MessageCircle } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
+import type { EmblaCarouselType } from 'embla-carousel-react';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 const testimonials = [
@@ -128,7 +129,7 @@ const InteractiveTestimonialCard = ({ testimonial }: { testimonial: typeof testi
 
 export default function Testimonials() {
   const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
+    Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
   
   return (
@@ -157,8 +158,6 @@ export default function Testimonials() {
           <Carousel
             plugins={[plugin.current]}
             className="w-full"
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
             opts={{
               loop: true,
             }}
