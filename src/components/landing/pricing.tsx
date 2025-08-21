@@ -44,8 +44,8 @@ export default function Pricing() {
                 </div>
             </div>
             <CardHeader className="p-8 pt-4">
-              <CardTitle className="text-2xl text-white">{plan.name}</CardTitle>
-              <CardDescription className="text-card-foreground/70">{plan.description}</CardDescription>
+              <CardTitle className="text-2xl text-foreground">{plan.name}</CardTitle>
+              <CardDescription className="text-muted-foreground">{plan.description}</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 p-8 pt-0">
               <div className="flex items-baseline gap-2">
