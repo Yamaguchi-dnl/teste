@@ -63,9 +63,9 @@ export default function Benefits() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className={cn(
-                                "border rounded-2xl p-6 shadow-md transition-all duration-300 relative z-10",
+                                "border rounded-2xl p-6 shadow-md transition-all duration-300 relative transform",
                                 isDark ? "bg-black text-white" : "bg-white text-card-foreground",
-                                "hover:shadow-xl hover:-translate-y-2",
+                                "hover:shadow-2xl hover:-translate-y-3 hover:z-10",
                                 "lg:[&:not(:first-child)]:-ml-12"
                             )}
                         >
