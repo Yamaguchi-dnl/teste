@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -29,7 +30,7 @@ export default function AdminPricingPage() {
     const fetchImageContent = async () => {
       setIsLoading(true);
       try {
-        const docRef = doc(db, "siteContent", "images", IMAGE_ID);
+        const docRef = doc(db, "siteContent", "images", "items", IMAGE_ID);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setContent(docSnap.data() as ImageContent);
@@ -72,7 +73,7 @@ export default function AdminPricingPage() {
       const imageUrl = await getDownloadURL(snapshot.ref);
 
       const contentToSave = { url: imageUrl };
-      await setDoc(doc(db, "siteContent", "images", IMAGE_ID), contentToSave);
+      await setDoc(doc(db, "siteContent", "images", "items", IMAGE_ID), contentToSave);
       
       setContent(contentToSave);
 

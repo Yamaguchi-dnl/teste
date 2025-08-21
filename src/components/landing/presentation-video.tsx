@@ -43,7 +43,7 @@ export default function PresentationVideo() {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const docRef = doc(db, "siteContent", "images", "presentationVideo");
+        const docRef = doc(db, "siteContent", "images", "items", "presentationVideo");
         const docSnap = await getDoc(docRef);
         if (docSnap.exists() && docSnap.data().url) {
           setBackgroundImageUrl(docSnap.data().url);

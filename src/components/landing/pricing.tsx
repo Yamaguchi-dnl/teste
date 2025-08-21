@@ -33,7 +33,7 @@ export default function Pricing() {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const docRef = doc(db, "siteContent", "images", "pricing");
+        const docRef = doc(db, "siteContent", "images", "items", "pricing");
         const docSnap = await getDoc(docRef);
         if (docSnap.exists() && docSnap.data().url) {
           setBackgroundImageUrl(docSnap.data().url);
