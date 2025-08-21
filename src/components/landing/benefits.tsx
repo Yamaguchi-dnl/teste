@@ -63,9 +63,9 @@ export default function Benefits() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className={cn(
-                                "border rounded-2xl p-8 shadow-lg transition-transform duration-300 ease-in-out relative z-10",
-                                isDark ? "bg-zinc-900 text-white" : "bg-card text-card-foreground",
-                                "hover:scale-105 hover:-translate-y-4 hover:z-50",
+                                "border rounded-2xl p-6 shadow-md transition-all duration-300 relative z-10",
+                                isDark ? "bg-black text-white" : "bg-white text-card-foreground",
+                                "hover:shadow-xl hover:-translate-y-2",
                                 "lg:[&:not(:first-child)]:-ml-12"
                             )}
                         >
@@ -79,8 +79,8 @@ export default function Benefits() {
                                     </div>
                                 </div>
                                 <div className="flex-1">
-                                    <CardTitle className={cn(isDark ? "text-white" : "text-foreground")}>{benefit.title}</CardTitle>
-                                    <p className={cn("mt-2", isDark ? "text-white/80" : "text-muted-foreground")}>{benefit.description}</p>
+                                    <h3 className={cn("text-xl font-bold mb-2", isDark ? "text-white" : "text-black")}>{benefit.title}</h3>
+                                    <p className={cn(isDark ? "text-gray-300" : "text-gray-600")}>{benefit.description}</p>
                                 </div>
                             </div>
                         </motion.div>
