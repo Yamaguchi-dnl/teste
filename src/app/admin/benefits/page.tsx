@@ -1,25 +1,25 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
-import { doc, getDoc, setDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Loader2 } from "lucide-react";
 
 interface Benefit {
   id: string;
-  icon: string; // We'll just store the name, not the component
+  icon: string;
   title: string;
   description: string;
 }
 
-export default function AdminTextsPage() {
+export default function AdminBenefitsPage() {
   const [benefits, setBenefits] = useState<Benefit[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -32,12 +32,8 @@ export default function AdminTextsPage() {
         const benefitsCollectionRef = collection(db, "siteContent", "benefits", "items");
         const querySnapshot = await getDocs(benefitsCollectionRef);
         const benefitsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Benefit));
-        
-        // Sort benefits by a potential order field or ID if necessary
         benefitsData.sort((a, b) => a.id.localeCompare(b.id));
-
         setBenefits(benefitsData);
-
       } catch (error) {
         console.error("Erro ao buscar conteúdo dos benefícios:", error);
         toast({
@@ -62,7 +58,6 @@ export default function AdminTextsPage() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      // Using Promise.all to save all documents concurrently
       await Promise.all(benefits.map(benefit => {
         const { id, ...data } = benefit;
         const docRef = doc(db, "siteContent", "benefits", "items", id);
@@ -86,15 +81,21 @@ export default function AdminTextsPage() {
   };
 
   if (isLoading) {
-    return <div>Carregando conteúdo...</div>;
+    return (
+        <div className="flex items-center justify-center h-40">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <span className="ml-4 text-lg">Carregando benefícios...</span>
+        </div>
+    );
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Gerenciar Textos do Site</h1>
+      <h1 className="text-3xl font-bold mb-6">Gerenciar Seção de Benefícios</h1>
       <Card>
         <CardHeader>
-          <CardTitle>Seção de Benefícios</CardTitle>
+          <CardTitle>Conteúdo dos Benefícios</CardTitle>
+          <CardDescription>Edite o título e a descrição de cada benefício que aparece no site.</CardDescription>
         </CardHeader>
         <CardContent>
           <Accordion type="single" collapsible className="w-full">
@@ -127,11 +128,10 @@ export default function AdminTextsPage() {
             ))}
           </Accordion>
           <Button onClick={handleSave} disabled={isSaving} className="mt-6">
-            {isSaving ? "Salvando..." : "Salvar Alterações nos Benefícios"}
+            {isSaving ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Salvando...</> : "Salvar Alterações nos Benefícios"}
           </Button>
         </CardContent>
       </Card>
-       {/* Outras seções de texto podem ser adicionadas aqui em outros Cards */}
     </div>
   );
 }

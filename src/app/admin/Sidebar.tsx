@@ -2,15 +2,16 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Settings, LogOut, FileText, Image as ImageIcon } from 'lucide-react';
+import { Home, Settings, LogOut, FileText, Image as ImageIcon, Star, Video, CircleDollarSign } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: Home },
-  { href: '/admin/texts', label: 'Textos', icon: FileText },
-  { href: '/admin/images', label: 'Imagens', icon: ImageIcon },
+  { href: '/admin', label: 'Seção Hero', icon: Home },
+  { href: '/admin/benefits', label: 'Benefícios', icon: Star },
+  { href: '/admin/video', label: 'Vídeo de Apresentação', icon: Video },
+  { href: '/admin/pricing', label: 'Planos', icon: CircleDollarSign },
   { href: '/admin/settings', label: 'Configurações', icon: Settings },
 ];
 

@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import Image from 'next/image';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 
 interface HeroContent {
   title: string;
@@ -33,7 +35,11 @@ export default function AdminPage() {
         if (docSnap.exists()) {
           setHeroContent(docSnap.data() as HeroContent);
         } else {
-          console.log("Nenhum documento encontrado!");
+          setHeroContent({
+            title: "Fale Alemão com Confiança e Fluidez",
+            subtitle: "Professores nativos, metodologia imersiva e aulas focadas em conversação.",
+            imageUrl: "https://placehold.co/1000x1200.png"
+          });
         }
       } catch (error) {
         console.error("Erro ao buscar conteúdo:", error);
@@ -92,43 +98,50 @@ export default function AdminPage() {
   };
 
   if (isLoading) {
-    return <div>Carregando conteúdo...</div>;
+    return (
+        <div className="flex items-center justify-center h-40">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <span className="ml-4 text-lg">Carregando conteúdo...</span>
+        </div>
+    );
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Gerenciar Conteúdo do Site</h1>
-      <div className="space-y-8">
-        <section className="p-6 border rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Seção Hero</h2>
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="title">Título</Label>
-              <Input id="title" name="title" value={heroContent.title} onChange={handleInputChange} />
-            </div>
-            <div>
-              <Label htmlFor="subtitle">Subtítulo</Label>
-              <Textarea id="subtitle" name="subtitle" value={heroContent.subtitle} onChange={handleInputChange} />
-            </div>
-            <div>
-              <Label htmlFor="image">Imagem de Fundo</Label>
-              <Input id="image" type="file" onChange={handleImageChange} accept="image/*" />
-              <div className="mt-4">
-                <p className="text-sm text-gray-500 mb-2">Pré-visualização:</p>
+      <h1 className="text-3xl font-bold mb-6">Gerenciar Seção Hero</h1>
+      <Card>
+        <CardHeader>
+          <CardTitle>Conteúdo da Seção Hero</CardTitle>
+          <CardDescription>Edite o título, subtítulo e a imagem de fundo da principal seção do site.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div>
+            <Label htmlFor="title">Título</Label>
+            <Input id="title" name="title" value={heroContent.title} onChange={handleInputChange} />
+          </div>
+          <div>
+            <Label htmlFor="subtitle">Subtítulo</Label>
+            <Textarea id="subtitle" name="subtitle" value={heroContent.subtitle} onChange={handleInputChange} rows={3} />
+          </div>
+          <div>
+            <Label htmlFor="image">Imagem de Fundo</Label>
+            <Input id="image" type="file" onChange={handleImageChange} accept="image/*" />
+            <div className="mt-4">
+              <p className="text-sm text-gray-500 mb-2">Pré-visualização:</p>
+              <div className="w-full max-w-sm aspect-video relative rounded-md overflow-hidden bg-gray-100">
                 {newImage ? (
-                  <Image src={URL.createObjectURL(newImage)} alt="Nova pré-visualização" width={300} height={150} className="rounded-md object-cover" />
+                  <Image src={URL.createObjectURL(newImage)} alt="Nova pré-visualização" fill className="object-cover" />
                 ) : (
-                  heroContent.imageUrl && <Image src={heroContent.imageUrl} alt="Imagem atual" width={300} height={150} className="rounded-md object-cover" />
+                  heroContent.imageUrl && <Image src={heroContent.imageUrl} alt="Imagem atual" fill className="object-cover" />
                 )}
               </div>
             </div>
-            <Button onClick={handleSave} disabled={isSaving}>
-              {isSaving ? "Salvando..." : "Salvar Alterações"}
-            </Button>
           </div>
-        </section>
-        {/* Outras seções podem ser adicionadas aqui */}
-      </div>
+          <Button onClick={handleSave} disabled={isSaving}>
+            {isSaving ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Salvando...</> : "Salvar Alterações"}
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }
