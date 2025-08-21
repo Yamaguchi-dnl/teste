@@ -32,10 +32,24 @@ const FuturistLine = ({ reverse = false, className }: { reverse?: boolean, class
 );
 
 
-export default function PresentationVideo() {
+export default function PresentationVideo({
+  backgroundImageUrl = "https://placehold.co/1920x1080.png"
+}: {
+  backgroundImageUrl?: string;
+}) {
   return (
-    <section id="apresentacao" className="w-full py-20 md:py-32 bg-zinc-950 text-white overflow-hidden presentation-video-background">
-      <div className="container mx-auto px-4 md:px-6 flex flex-col items-center">
+    <section id="apresentacao" className="relative w-full py-20 md:py-32 bg-zinc-950 text-white overflow-hidden">
+      <Image
+        src={backgroundImageUrl}
+        alt="Imagem de fundo da apresentação"
+        layout="fill"
+        objectFit="cover"
+        className="absolute inset-0 z-0 opacity-20"
+        data-ai-hint="abstract background"
+      />
+      <div className="absolute inset-0 bg-black/70 z-0" />
+
+      <div className="container relative z-10 mx-auto px-4 md:px-6 flex flex-col items-center">
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
