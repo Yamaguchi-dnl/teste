@@ -25,7 +25,7 @@ export default function Pricing() {
     <section id="planos" className="py-20 md:py-32 bg-zinc-950 text-white dark-section">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-white shadow-lg backdrop-blur-sm">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white shadow-md backdrop-blur-md">
             <Package className="h-4 w-4 text-primary" />
             Acesso Total
           </div>
@@ -37,7 +37,7 @@ export default function Pricing() {
           </p>
         </div>
         <div className="flex justify-center mt-12">
-          <Card className="w-full max-w-lg bg-white/5 border-white/10 shadow-lg rounded-2xl">
+          <Card className="w-full max-w-lg bg-card border shadow-lg rounded-2xl">
             <div className="p-6 relative">
                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-bold">
                     OFERTA ÚNICA
@@ -45,20 +45,20 @@ export default function Pricing() {
             </div>
             <CardHeader className="p-8 pt-4">
               <CardTitle className="text-2xl text-white">{plan.name}</CardTitle>
-              <CardDescription className="text-white/70">{plan.description}</CardDescription>
+              <CardDescription className="text-card-foreground/70">{plan.description}</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 p-8 pt-0">
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-bold">
+                <span className="text-4xl font-bold text-foreground">
                   {plan.price}
                 </span>
-                <span className="text-white/60">pagamento único</span>
+                <span className="text-muted-foreground">pagamento único</span>
               </div>
               <ul className="mt-6 space-y-4">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <Check className="h-5 w-5 text-primary" />
-                    <span className="text-white/90">{feature}</span>
+                    <span className="text-card-foreground/90">{feature}</span>
                   </li>
                 ))}
               </ul>
