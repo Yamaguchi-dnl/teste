@@ -10,6 +10,12 @@ import { useEffect, useState } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
+interface VideoContent {
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+}
+
 const FuturistLine = ({ reverse = false, className }: { reverse?: boolean, className?: string }) => (
   <svg
     width="100%"
@@ -35,27 +41,30 @@ const FuturistLine = ({ reverse = false, className }: { reverse?: boolean, class
   </svg>
 );
 
+const defaultContent: VideoContent = {
+  title: "Sua jornada para a fluência começa aqui",
+  subtitle: "Assista ao vídeo e veja como nossa metodologia pode transformar o seu aprendizado.",
+  imageUrl: "https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(7).png"
+};
 
 export default function PresentationVideo() {
-  const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(null);
+  const [content, setContent] = useState<VideoContent>(defaultContent);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const docRef = doc(db, "siteContent", "images", "items", "presentationVideo");
+        const docRef = doc(db, "siteContent", "presentationVideo");
         const docSnap = await getDoc(docRef);
-        if (docSnap.exists() && docSnap.data().url) {
-          setBackgroundImageUrl(docSnap.data().url);
+        if (docSnap.exists()) {
+          setContent(docSnap.data() as VideoContent);
         } else {
-          const defaultUrl = "https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(7).png";
-          // If it doesn't exist, create it with the default value
-          await setDoc(docRef, { url: defaultUrl });
-          setBackgroundImageUrl(defaultUrl);
+          await setDoc(docRef, defaultContent);
+          setContent(defaultContent);
         }
       } catch (error) {
-        console.error("Error fetching presentation video background:", error);
-        setBackgroundImageUrl("https://ik.imagekit.io/leosmc2zb/Sem%20T%C3%ADtulo-1(7).png");
+        console.error("Error fetching presentation video content:", error);
+        setContent(defaultContent);
       } finally {
         setIsLoading(false);
       }
@@ -66,13 +75,13 @@ export default function PresentationVideo() {
 
   return (
     <section id="apresentacao" className="relative w-full py-20 md:py-32 bg-zinc-950 text-white overflow-hidden">
-      {isLoading || !backgroundImageUrl ? (
+      {isLoading || !content.imageUrl ? (
         <div className="absolute inset-0 bg-black/60 z-10 flex items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       ) : (
         <Image
-          src={backgroundImageUrl}
+          src={content.imageUrl}
           alt="Imagem de fundo da apresentação"
           layout="fill"
           objectFit="cover"
@@ -93,10 +102,10 @@ export default function PresentationVideo() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl font-headline">
-            Sua jornada para a fluência começa aqui
+            {content.title}
           </h2>
           <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">
-            Assista ao vídeo e veja como nossa metodologia pode transformar o seu aprendizado.
+            {content.subtitle}
           </p>
         </motion.div>
         

@@ -6,7 +6,7 @@ import { BookOpen, Globe, Users, Award, Zap, Loader2 } from "lucide-react";
 import { CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 interface Benefit {
@@ -16,11 +16,16 @@ interface Benefit {
   description: string;
 }
 
-const benefitIcons: { [key: string]: (className?: string) => React.ReactNode } = {
-  BookOpen: (className?: string) => <BookOpen className={cn("h-8 w-8", className)} />,
-  Users: (className?: string) => <Users className={cn("h-8 w-8", className)} />,
-  Globe: (className?: string) => <Globe className={cn("h-8 w-8", className)} />,
-  Award: (className?: string) => <Award className={cn("h-8 w-8", className)} />,
+interface BenefitsContent {
+  title: string;
+  subtitle: string;
+}
+
+const benefitIcons: { [key: string]: (props: { className?: string }) => React.ReactNode } = {
+  BookOpen: (props) => <BookOpen {...props} />,
+  Users: (props) => <Users {...props} />,
+  Globe: (props) => <Globe {...props} />,
+  Award: (props) => <Award {...props} />,
 };
 
 const defaultBenefits: Omit<Benefit, 'id'>[] = [
@@ -46,19 +51,35 @@ const defaultBenefits: Omit<Benefit, 'id'>[] = [
   },
 ];
 
+const defaultContent: BenefitsContent = {
+  title: "Por que aprender alemão na Ovídio Academy?",
+  subtitle: "Oferecemos uma experiência de aprendizado completa, desenhada para a sua fluência em alemão."
+};
+
 
 export default function Benefits() {
   const [benefits, setBenefits] = useState<Benefit[]>([]);
+  const [content, setContent] = useState<BenefitsContent>(defaultContent);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBenefits = async () => {
       try {
+        // Fetch main content
+        const contentDocRef = doc(db, "siteContent", "benefits");
+        const contentDocSnap = await getDoc(contentDocRef);
+        if (contentDocSnap.exists()) {
+          setContent(contentDocSnap.data() as BenefitsContent);
+        } else {
+          await setDoc(contentDocRef, defaultContent);
+          setContent(defaultContent);
+        }
+
+        // Fetch benefit items
         const benefitsCollectionRef = collection(db, "siteContent", "benefits", "items");
         const querySnapshot = await getDocs(benefitsCollectionRef);
 
         if (querySnapshot.empty) {
-          // If no benefits in Firestore, populate with default and set state
           const benefitsToCreate = await Promise.all(defaultBenefits.map(async (benefit, index) => {
             const docId = `benefit${index + 1}`;
             const docRef = doc(db, "siteContent", "benefits", "items", docId);
@@ -73,8 +94,8 @@ export default function Benefits() {
         }
       } catch (error) {
         console.error("Error fetching benefits:", error);
-        // Fallback to default benefits on error
         setBenefits(defaultBenefits.map((b, i) => ({ id: `benefit${i+1}`, ...b })));
+        setContent(defaultContent);
       } finally {
         setIsLoading(false);
       }
@@ -99,10 +120,10 @@ export default function Benefits() {
             Nossa Abordagem
           </div>
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Por que aprender alemão na Ovídio Academy?
+            {content.title}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Oferecemos uma experiência de aprendizado completa, desenhada para a sua fluência em alemão.
+            {content.subtitle}
           </p>
         </motion.div>
         
@@ -136,7 +157,7 @@ export default function Benefits() {
                                         "mx-auto flex h-16 w-16 items-center justify-center rounded-2xl",
                                         "bg-primary/10"
                                     )}>
-                                        {IconComponent(isDark ? "text-primary" : "text-foreground")}
+                                        <IconComponent className={cn("h-8 w-8", isDark ? "text-primary" : "text-foreground")} />
                                     </div>
                                 </div>
                                 <div className="flex-1">
