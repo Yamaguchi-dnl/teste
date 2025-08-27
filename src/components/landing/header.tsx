@@ -92,7 +92,7 @@ export default function Header() {
           })}
         </nav>
         <div className="hidden md:flex items-center gap-4">
-          <Button asChild variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
+          <Button asChild variant="default" className="rounded-full">
             <Link href="#contato">Quero me inscrever</Link>
           </Button>
         </div>
@@ -124,7 +124,7 @@ export default function Header() {
                   ))}
                 </nav>
                 <div className="mt-auto">
-                    <Button asChild size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full">
+                    <Button asChild size="lg" className="w-full rounded-full">
                       <Link href="#contato" onClick={() => setIsMobileMenuOpen(false)}>Quero me inscrever</Link>
                     </Button>
                 </div>

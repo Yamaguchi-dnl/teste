@@ -101,7 +101,7 @@ export default function ContactForm() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-6">
+              <Button type="submit" disabled={isLoading} className="w-full text-lg py-6">
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Quero ser fluente em alemão
               </Button>
