@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Settings, LogOut, FileText, Image as ImageIcon, Star, Video, CircleDollarSign } from 'lucide-react';
+import { Home, Settings, LogOut, Star, Video, CircleDollarSign, ExternalLink } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -40,6 +40,15 @@ export default function Sidebar() {
         </ul>
       </nav>
       <div className="mt-auto">
+        <Link 
+          href="/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-3 px-4 py-3 rounded-md transition-colors text-gray-300 hover:bg-gray-700 hover:text-white mb-2"
+        >
+          <ExternalLink className="h-5 w-5" />
+          <span>Voltar para o Site</span>
+        </Link>
         <div className="p-4 border-t border-gray-700">
           <p className="text-sm font-medium">{user?.email}</p>
         </div>
